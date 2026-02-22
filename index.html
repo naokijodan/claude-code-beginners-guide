@@ -950,6 +950,7 @@
       <li><a href="#compare"><span class="nav-icon">&#128200;</span>ツール比較</a></li>
       <li><a href="#faq"><span class="nav-icon">&#10067;</span>よくある質問</a></li>
       <li><a href="#next"><span class="nav-icon">&#128640;</span>次のステップ</a></li>
+      <li><a href="#csv-analysis"><span class="nav-icon">&#128202;</span>CSV分析の実践</a></li>
     </ul>
   </nav>
 
@@ -2092,10 +2093,133 @@
           </div>
 
           <div class="link-item">
+            <span class="link-icon">&#128202;</span>
+            <div>
+              <a href="https://naokijodan.github.io/codex-csv-analysis-guide/" target="_blank" rel="noopener">CSV市場分析ダッシュボード作成ガイド</a>
+              <div class="link-desc">CSVデータから分析ダッシュボードを自動生成する実践ガイド</div>
+            </div>
+          </div>
+
+          <div class="link-item">
             <span class="link-icon">&#128214;</span>
             <div>
               <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Anthropic公式ドキュメント</a>
               <div class="link-desc">Claude Codeの公式リファレンス</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 実践事例：CSV分析 -->
+      <section class="section" id="csv-analysis">
+        <div class="section-header">
+          <div class="section-number">15</div>
+          <h2>実践事例：CSVデータから分析資料を作る</h2>
+        </div>
+
+        <p>
+          AI CLIツールの実践的な活用例として、<strong>CSVデータから市場分析ダッシュボードを自動生成</strong>するワークフローを紹介します。
+          「ぶんせき君」などのツールで集めたCSVデータを、Claude Codeに渡すだけで、見やすい分析資料が完成します。
+        </p>
+
+        <h3>どんなことができる？</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">&#128202;</div>
+            <h4>データのクレンジング</h4>
+            <p>CSVの重複削除、欠損値の補完、フォーマット統一など、面倒な前処理をAIが自動で行います。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128200;</div>
+            <h4>グラフ・チャート生成</h4>
+            <p>売上推移、価格分布、カテゴリ別比較など、データに適したグラフを自動で生成します。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#127760;</div>
+            <h4>HTMLダッシュボード化</h4>
+            <p>分析結果をインタラクティブなHTMLページにまとめて、ブラウザで閲覧できる形にします。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128640;</div>
+            <h4>GitHub Pagesで公開</h4>
+            <p>作成したダッシュボードをそのままWeb上に公開。URLを共有するだけで誰でも閲覧可能。</p>
+          </div>
+        </div>
+
+        <h3>作業の流れ（6ステップ）</h3>
+        <div class="step-cards">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div>
+              <h4>CSVデータを用意する</h4>
+              <p>ぶんせき君などで収集したCSVデータをデスクトップに置きます。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Claude Codeでデータを読み込む</h4>
+              <p>「このCSVを分析して」と指示するだけで、AIがデータの構造を把握します。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div>
+              <h4>AIがデータをクレンジング</h4>
+              <p>重複の除去、価格データの数値化、カテゴリの統一など、前処理を自動実行。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div>
+              <h4>分析・グラフ生成</h4>
+              <p>データの傾向を分析し、適切なグラフやチャートを自動生成します。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div>
+              <h4>HTMLダッシュボードを作成</h4>
+              <p>分析結果をまとめたインタラクティブなHTMLページを生成します。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">6</div>
+            <div>
+              <h4>GitHub Pagesで公開</h4>
+              <p>完成したダッシュボードをWeb上に公開し、URLで共有できます。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">&#128172; Claude Codeでの指示例</div>
+          <div class="scenario-body">
+            <div class="scenario-exchange">
+              <div class="scenario-you">
+                <span class="scenario-label">あなた</span>
+                <span class="scenario-text">デスクトップにある「商品データ.csv」を読み込んで、カテゴリ別の価格帯分析と売上推移グラフを含むHTMLダッシュボードを作って。GitHub Pagesで公開して。</span>
+              </div>
+              <div class="scenario-ai">
+                <span class="scenario-label">Claude</span>
+                <span class="scenario-text">CSVを分析しました。3,500件のデータから、カテゴリ別価格帯・月別売上推移・トップ10商品のダッシュボードを作成し、GitHub Pagesに公開しました。URL: https://&#8230;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-box-label">&#128161; ポイント</div>
+          <p>CSVのフォーマットや分析の観点が決まっている場合は、CLAUDE.mdにルールを書いておくと、毎回同じ品質の分析資料が作れます。</p>
+        </div>
+
+        <div class="link-box">
+          <div class="link-box-title">&#128279; 詳しい手順はこちら</div>
+          <div class="link-item">
+            <span class="link-icon">&#128202;</span>
+            <div>
+              <a href="https://naokijodan.github.io/codex-csv-analysis-guide/" target="_blank" rel="noopener">CSV市場分析ダッシュボード作成 完全ガイド</a>
+              <div class="link-desc">環境構築からデータクレンジング、HTML生成、GitHub Pages公開までの全6ステップを詳しく解説。CODEX.mdテンプレートやMCP設定ガイド付き。</div>
             </div>
           </div>
         </div>
