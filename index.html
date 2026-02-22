@@ -10,33 +10,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg: #0f0f14;
-      --color-surface: #1a1a24;
-      --color-surface-hover: #22222e;
-      --color-border: #2a2a3a;
-      --color-text: #e8e8f0;
-      --color-text-muted: #a8a8c0;
-      --color-text-dim: #7a7a95;
-      --color-primary: #d4845a;
-      --color-primary-light: #e8a67a;
-      --color-primary-dark: #b06840;
-      --color-accent: #5a8fd4;
-      --color-accent-light: #7ab0f0;
-      --color-green: #5ad48f;
-      --color-green-dark: #1a3028;
-      --color-yellow: #d4c45a;
-      --color-yellow-dark: #302d1a;
+      --color-bg: #f7f5f2;
+      --color-surface: #ffffff;
+      --color-surface-hover: #f0ede8;
+      --color-border: #e0ddd6;
+      --color-text: #2d2a26;
+      --color-text-muted: #5c5852;
+      --color-text-dim: #8a857c;
+      --color-primary: #c27a4a;
+      --color-primary-light: #d4925e;
+      --color-primary-dark: #a86838;
+      --color-accent: #3d7bbf;
+      --color-accent-light: #5090d0;
+      --color-green: #3aaa6e;
+      --color-green-dark: #d4efe2;
+      --color-yellow: #c4a832;
+      --color-yellow-dark: #fdf8e8;
       --color-purple: #a05ad4;
-      --color-purple-dark: #261a30;
-      --color-red: #d45a5a;
-      --color-codex: #10a37f;
-      --color-gemini: #4285f4;
-      --color-code-bg: #14141e;
+      --color-purple-dark: #f3eeff;
+      --color-red: #c45050;
+      --color-codex: #0d8a6a;
+      --color-gemini: #3b78d8;
+      --color-code-bg: #f9f7f4;
       --font-main: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
       --sidebar-width: 300px;
-      --radius: 14px;
-      --radius-sm: 10px;
+      --radius: 18px;
+      --radius-sm: 14px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,7 +61,8 @@
       width: var(--sidebar-width);
       height: 100vh;
       background: var(--color-surface);
-      border-right: 1px solid var(--color-border);
+      border-right: none;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.07);
       overflow-y: auto;
       z-index: 100;
       padding: 28px 0;
@@ -91,12 +92,47 @@
     .sidebar-nav { list-style: none; }
 
     .sidebar-nav .nav-phase {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 14px 28px 6px;
       font-size: 0.65rem;
       font-weight: 700;
       color: var(--color-text-dim);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+
+    .sidebar-nav .nav-phase:hover {
+      color: var(--color-primary);
+    }
+
+    .phase-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+
+    .phase-arrow.open {
+      transform: rotate(0deg);
+    }
+
+    .phase-arrow:not(.open) {
+      transform: rotate(-90deg);
+    }
+
+    .phase-group {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
+      list-style: none;
+    }
+
+    .phase-group.open {
+      max-height: 500px;
     }
 
     .sidebar-nav a {
@@ -118,8 +154,8 @@
     }
 
     .sidebar-nav a.active {
-      color: var(--color-primary-light);
-      background: rgba(212, 132, 90, 0.08);
+      color: var(--color-primary);
+      background: rgba(194,122,74,0.08);
       border-left-color: var(--color-primary);
     }
 
@@ -145,13 +181,14 @@
       cursor: pointer;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .sidebar-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.3);
       z-index: 90;
     }
 
@@ -165,7 +202,7 @@
     .hero {
       position: relative;
       padding: 110px 60px 90px;
-      background: linear-gradient(135deg, #1a1420 0%, #14141e 40%, #141e1e 100%);
+      background: linear-gradient(135deg, #fdf8f2 0%, #f7f5f2 40%, #f2f7f5 100%);
       overflow: hidden;
     }
 
@@ -174,7 +211,7 @@
       position: absolute;
       top: -50%; right: -20%;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(212,132,90,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(194,122,74,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -183,12 +220,12 @@
       align-items: center;
       gap: 8px;
       padding: 10px 20px;
-      background: rgba(212,132,90,0.12);
-      border: 1px solid rgba(212,132,90,0.25);
+      background: rgba(194,122,74,0.1);
+      border: 1px solid rgba(194,122,74,0.22);
       border-radius: 100px;
       font-size: 0.82rem;
       font-weight: 500;
-      color: var(--color-primary-light);
+      color: var(--color-primary-dark);
       margin-bottom: 30px;
     }
 
@@ -198,6 +235,7 @@
       line-height: 1.35;
       letter-spacing: -0.02em;
       margin-bottom: 24px;
+      color: var(--color-text);
     }
 
     .hero h1 .highlight {
@@ -228,6 +266,7 @@
       border-radius: 100px;
       font-size: 0.82rem;
       color: var(--color-text-muted);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     /* Content */
@@ -246,8 +285,8 @@
       align-items: center;
       justify-content: center;
       width: 42px; height: 42px;
-      background: rgba(212,132,90,0.15);
-      color: var(--color-primary-light);
+      background: rgba(194,122,74,0.12);
+      color: var(--color-primary);
       border-radius: 50%;
       font-size: 0.9rem;
       font-weight: 700;
@@ -259,6 +298,7 @@
       font-weight: 800;
       letter-spacing: -0.01em;
       margin-bottom: 10px;
+      color: var(--color-text);
     }
 
     .section h3 {
@@ -289,15 +329,15 @@
     .section li strong { color: var(--color-text); }
 
     .section a {
-      color: var(--color-accent-light);
+      color: var(--color-accent);
       text-decoration: none;
-      border-bottom: 1px solid rgba(122,176,240,0.3);
+      border-bottom: 1px solid rgba(61,123,191,0.3);
       transition: all 0.2s;
     }
 
     .section a:hover {
-      color: #fff;
-      border-bottom-color: #fff;
+      color: var(--color-accent-light);
+      border-bottom-color: var(--color-accent-light);
     }
 
     /* Phase divider */
@@ -325,17 +365,19 @@
       border-radius: 100px;
       font-size: 0.82rem;
       font-weight: 700;
-      color: var(--color-primary-light);
+      color: var(--color-primary);
       white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     /* Term box */
     .term-box {
-      background: linear-gradient(135deg, rgba(90,141,212,0.08), rgba(90,141,212,0.03));
-      border: 1px solid rgba(90,141,212,0.2);
+      background: #eef4fb;
+      border: 1px solid #c8ddf0;
       border-radius: var(--radius);
       padding: 30px 30px 22px;
       margin: 36px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .term-box-title {
@@ -344,10 +386,10 @@
       gap: 8px;
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--color-accent-light);
+      color: var(--color-accent);
       margin-bottom: 18px;
       padding: 5px 14px;
-      background: rgba(90,141,212,0.12);
+      background: rgba(61,123,191,0.1);
       border-radius: 100px;
     }
 
@@ -364,17 +406,18 @@
       color: var(--color-text-muted);
       font-size: 0.92rem;
       padding-left: 18px;
-      border-left: 2px solid rgba(90,141,212,0.2);
+      border-left: 2px solid rgba(61,123,191,0.25);
       line-height: 1.9;
     }
 
     /* Link box */
     .link-box {
-      background: linear-gradient(135deg, rgba(90,212,143,0.08), rgba(90,212,143,0.03));
-      border: 1px solid rgba(90,212,143,0.2);
+      background: #edf8f1;
+      border: 1px solid #b8e0c8;
       border-radius: var(--radius);
       padding: 30px;
       margin: 36px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .link-box-title {
@@ -386,7 +429,7 @@
       color: var(--color-green);
       margin-bottom: 18px;
       padding: 5px 14px;
-      background: rgba(90,212,143,0.12);
+      background: rgba(58,170,110,0.12);
       border-radius: 100px;
     }
 
@@ -396,12 +439,13 @@
       gap: 14px;
       padding: 14px 18px;
       margin-bottom: 10px;
-      background: rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.7);
       border-radius: var(--radius-sm);
       transition: background 0.2s;
+      border: 1px solid rgba(184,224,200,0.5);
     }
 
-    .link-item:hover { background: rgba(0,0,0,0.35); }
+    .link-item:hover { background: rgba(255,255,255,0.95); }
 
     .link-item .link-icon {
       font-size: 1.2rem;
@@ -416,7 +460,7 @@
       border-bottom: none;
     }
 
-    .link-item a:hover { color: #fff; }
+    .link-item a:hover { color: var(--color-accent); }
 
     .link-item .link-desc {
       font-size: 0.82rem;
@@ -427,11 +471,12 @@
 
     /* Tip / Warn box */
     .tip-box {
-      background: linear-gradient(135deg, rgba(212,196,90,0.08), rgba(212,196,90,0.03));
-      border: 1px solid rgba(212,196,90,0.2);
+      background: #fdf8e8;
+      border: 1px solid #e8d890;
       border-radius: var(--radius);
       padding: 24px 28px;
       margin: 28px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .tip-box-label {
@@ -454,11 +499,12 @@
     .tip-box p:last-child { margin-bottom: 0; }
 
     .warn-box {
-      background: linear-gradient(135deg, rgba(212,90,90,0.08), rgba(212,90,90,0.03));
-      border: 1px solid rgba(212,90,90,0.2);
+      background: #fdf0f0;
+      border: 1px solid #e8b0b0;
       border-radius: var(--radius);
       padding: 24px 28px;
       margin: 28px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .warn-box-label {
@@ -486,6 +532,7 @@
       border-radius: var(--radius-sm);
       margin: 18px 0 28px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .code-block-header {
@@ -493,7 +540,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 18px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(0,0,0,0.02);
       border-bottom: 1px solid var(--color-border);
     }
 
@@ -504,9 +551,24 @@
       font-family: var(--font-mono);
     }
 
+    .code-block-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-ok-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #2e7d32;
+      background: #e8f5e9;
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
     .code-copy-btn {
       padding: 6px 14px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.04);
       border: 1px solid var(--color-border);
       border-radius: 6px;
       color: var(--color-text-dim);
@@ -517,7 +579,7 @@
     }
 
     .code-copy-btn:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.08);
       color: var(--color-text);
     }
 
@@ -534,12 +596,12 @@
 
     .code-inline {
       padding: 3px 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--color-border);
+      background: rgba(194,122,74,0.08);
+      border: 1px solid rgba(194,122,74,0.2);
       border-radius: 6px;
       font-family: var(--font-mono);
       font-size: 0.88em;
-      color: var(--color-primary-light);
+      color: var(--color-primary-dark);
     }
 
     /* Table */
@@ -568,7 +630,7 @@
       line-height: 1.8;
     }
 
-    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .comparison-table tr:hover td { background: rgba(194,122,74,0.03); }
 
     /* Step cards */
     .step-cards {
@@ -586,17 +648,18 @@
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
       transition: border-color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    .step-card:hover { border-color: rgba(212,132,90,0.3); }
+    .step-card:hover { border-color: rgba(194,122,74,0.3); }
 
     .step-num {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 46px; height: 46px;
-      background: rgba(212,132,90,0.12);
-      color: var(--color-primary-light);
+      background: rgba(194,122,74,0.1);
+      color: var(--color-primary);
       border-radius: 50%;
       font-size: 1.1rem;
       font-weight: 800;
@@ -630,9 +693,10 @@
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
       transition: border-color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    .feature-card:hover { border-color: rgba(212,132,90,0.3); }
+    .feature-card:hover { border-color: rgba(194,122,74,0.3); }
     .feature-card .feature-icon { font-size: 1.6rem; margin-bottom: 14px; }
 
     .feature-card h4 {
@@ -664,9 +728,10 @@
       border-radius: var(--radius);
       text-align: center;
       transition: border-color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    .tool-card:hover { border-color: rgba(212,132,90,0.3); }
+    .tool-card:hover { border-color: rgba(194,122,74,0.3); }
 
     .tool-card .tool-icon {
       font-size: 2.2rem;
@@ -694,7 +759,7 @@
     }
 
     .tool-card.claude { border-top: 3px solid var(--color-primary); }
-    .tool-card.claude h4 { color: var(--color-primary-light); }
+    .tool-card.claude h4 { color: var(--color-primary); }
     .tool-card.codex { border-top: 3px solid var(--color-codex); }
     .tool-card.codex h4 { color: var(--color-codex); }
     .tool-card.gemini { border-top: 3px solid var(--color-gemini); }
@@ -709,6 +774,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--color-border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .video-container iframe {
@@ -723,6 +789,7 @@
       border-radius: var(--radius-sm);
       margin-bottom: 12px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .faq-q {
@@ -761,6 +828,7 @@
       color: var(--color-text-muted);
       border-top: 1px solid var(--color-border);
       line-height: 1.9;
+      background: var(--color-bg);
     }
 
     .faq-item.open .faq-a { display: block; }
@@ -816,6 +884,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       margin: 24px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .scenario-header {
@@ -823,11 +892,11 @@
       align-items: center;
       gap: 10px;
       padding: 16px 24px;
-      background: rgba(212,132,90,0.06);
+      background: rgba(194,122,74,0.05);
       border-bottom: 1px solid var(--color-border);
       font-weight: 700;
       font-size: 0.95rem;
-      color: var(--color-primary-light);
+      color: var(--color-primary);
     }
 
     .scenario-body { padding: 24px; }
@@ -850,13 +919,13 @@
     }
 
     .scenario-you .scenario-label {
-      background: rgba(90,141,212,0.15);
-      color: var(--color-accent-light);
+      background: rgba(61,123,191,0.12);
+      color: var(--color-accent);
     }
 
     .scenario-ai .scenario-label {
-      background: rgba(212,132,90,0.15);
-      color: var(--color-primary-light);
+      background: rgba(194,122,74,0.12);
+      color: var(--color-primary);
     }
 
     .scenario-text {
@@ -890,6 +959,7 @@
       justify-content: center;
       z-index: 50;
       transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .scroll-top:hover {
@@ -927,30 +997,55 @@
       <span>Claude Code / Codex / Gemini</span>
     </div>
     <ul class="sidebar-nav">
-      <li class="nav-phase">Phase 1 &#8212; 知る</li>
-      <li><a href="#intro"><span class="nav-icon">&#128214;</span>この資料について</a></li>
-      <li><a href="#what-is"><span class="nav-icon">&#128161;</span>AI CLIツールとは</a></li>
-      <li><a href="#three-tools"><span class="nav-icon">&#128295;</span>3つのツール紹介</a></li>
-      <li><a href="#video"><span class="nav-icon">&#127909;</span>動画で理解する</a></li>
+      <li class="nav-phase" onclick="togglePhase(this)">
+        <span>Phase 1 &#8212; 知る</span>
+        <span class="phase-arrow open">&#9662;</span>
+      </li>
+      <div class="phase-group open">
+        <li><a href="#intro"><span class="nav-icon">&#128214;</span>この資料について</a></li>
+        <li><a href="#what-is"><span class="nav-icon">&#128161;</span>AI CLIツールとは</a></li>
+        <li><a href="#three-tools"><span class="nav-icon">&#128295;</span>3つのツール紹介</a></li>
+        <li><a href="#video"><span class="nav-icon">&#127909;</span>動画で理解する</a></li>
+      </div>
 
-      <li class="nav-phase">Phase 2 &#8212; 準備する</li>
-      <li><a href="#prepare"><span class="nav-icon">&#128221;</span>始める前の準備</a></li>
-      <li><a href="#install"><span class="nav-icon">&#128187;</span>インストール</a></li>
+      <li class="nav-phase" onclick="togglePhase(this)">
+        <span>Phase 2 &#8212; 準備する</span>
+        <span class="phase-arrow">&#9662;</span>
+      </li>
+      <div class="phase-group">
+        <li><a href="#prepare"><span class="nav-icon">&#128221;</span>始める前の準備</a></li>
+        <li><a href="#install"><span class="nav-icon">&#128187;</span>インストール</a></li>
+      </div>
 
-      <li class="nav-phase">Phase 3 &#8212; 使う</li>
-      <li><a href="#first-steps"><span class="nav-icon">&#128075;</span>はじめの一歩</a></li>
-      <li><a href="#practice"><span class="nav-icon">&#128736;</span>実践してみよう</a></li>
+      <li class="nav-phase" onclick="togglePhase(this)">
+        <span>Phase 3 &#8212; 使う</span>
+        <span class="phase-arrow">&#9662;</span>
+      </li>
+      <div class="phase-group">
+        <li><a href="#first-steps"><span class="nav-icon">&#128075;</span>はじめの一歩</a></li>
+        <li><a href="#practice"><span class="nav-icon">&#128736;</span>実践してみよう</a></li>
+      </div>
 
-      <li class="nav-phase">Phase 4 &#8212; 深める</li>
-      <li><a href="#features"><span class="nav-icon">&#9889;</span>便利な機能</a></li>
-      <li><a href="#mcp"><span class="nav-icon">&#128268;</span>MCPで拡張する</a></li>
-      <li><a href="#obsidian"><span class="nav-icon">&#128466;</span>ナレッジ管理</a></li>
+      <li class="nav-phase" onclick="togglePhase(this)">
+        <span>Phase 4 &#8212; 深める</span>
+        <span class="phase-arrow">&#9662;</span>
+      </li>
+      <div class="phase-group">
+        <li><a href="#features"><span class="nav-icon">&#9889;</span>便利な機能</a></li>
+        <li><a href="#mcp"><span class="nav-icon">&#128268;</span>MCPで拡張する</a></li>
+        <li><a href="#obsidian"><span class="nav-icon">&#128466;</span>ナレッジ管理</a></li>
+      </div>
 
-      <li class="nav-phase">Phase 5 &#8212; 比較 &amp; 解決</li>
-      <li><a href="#compare"><span class="nav-icon">&#128200;</span>ツール比較</a></li>
-      <li><a href="#faq"><span class="nav-icon">&#10067;</span>よくある質問</a></li>
-      <li><a href="#next"><span class="nav-icon">&#128640;</span>次のステップ</a></li>
-      <li><a href="#csv-analysis"><span class="nav-icon">&#128202;</span>CSV分析の実践</a></li>
+      <li class="nav-phase" onclick="togglePhase(this)">
+        <span>Phase 5 &#8212; 比較 &amp; 解決</span>
+        <span class="phase-arrow">&#9662;</span>
+      </li>
+      <div class="phase-group">
+        <li><a href="#compare"><span class="nav-icon">&#128200;</span>ツール比較</a></li>
+        <li><a href="#faq"><span class="nav-icon">&#10067;</span>よくある質問</a></li>
+        <li><a href="#next"><span class="nav-icon">&#128640;</span>次のステップ</a></li>
+        <li><a href="#csv-analysis"><span class="nav-icon">&#128202;</span>CSV分析の実践</a></li>
+      </div>
     </ul>
   </nav>
 
@@ -1105,7 +1200,7 @@
               <dd>CLIを使うためのアプリ。Macでは「ターミナル」、Windowsでは「PowerShell」と呼ばれます。黒い画面のアレです。</dd>
             </div>
           </dl>
-          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; もっと詳しく知りたい方は <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent-light);">AI基礎用語270語 教科書</a> を参照してください。</p>
+          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; もっと詳しく知りたい方は <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent);">AI基礎用語270語 教科書</a> を参照してください。</p>
         </div>
       </section>
 
@@ -1328,7 +1423,7 @@
               <dd>毎月決まった金額を支払って利用する仕組み。NetflixやSpotifyと同じ方式です。3つのAI CLIツールすべてがこの形式です。</dd>
             </div>
           </dl>
-          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent-light);">AI基礎用語270語 教科書</a></p>
+          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent);">AI基礎用語270語 教科書</a></p>
         </div>
       </section>
 
@@ -1345,12 +1440,12 @@
           以下のリンクから進めてください。
         </p>
 
-        <div class="link-box" style="border-color: rgba(212,132,90,0.3); background: linear-gradient(135deg, rgba(212,132,90,0.08), rgba(212,132,90,0.03));">
-          <div class="link-box-title" style="color: var(--color-primary-light); background: rgba(212,132,90,0.12);">&#128640; インストールはこちら</div>
+        <div class="link-box" style="border-color: #e0c0a0; background: linear-gradient(135deg, #fdf4ee, #fefcfa);">
+          <div class="link-box-title" style="color: var(--color-primary); background: rgba(194,122,74,0.12);">&#128640; インストールはこちら</div>
           <div class="link-item">
             <span class="link-icon">&#128187;</span>
             <div>
-              <a href="https://naokijodan.github.io/ai-cli-installer/" target="_blank" rel="noopener" style="color: var(--color-primary-light); font-size: 1.05rem;">AI CLI 統合インストーラー</a>
+              <a href="https://naokijodan.github.io/ai-cli-installer/" target="_blank" rel="noopener" style="color: var(--color-primary); font-size: 1.05rem;">AI CLI 統合インストーラー</a>
               <div class="link-desc">Mac / Windows 対応。ワンコマンドでClaude Code・Codex CLI・Gemini CLIを一括インストール。APIキーの設定方法も解説。</div>
             </div>
           </div>
@@ -1406,7 +1501,10 @@
         <div class="code-block">
           <div class="code-block-header">
             <span class="code-block-label">Claude Codeを起動</span>
-            <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            <div class="code-block-actions">
+              <span class="copy-ok-badge">コピペでOK</span>
+              <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            </div>
           </div>
           <pre><code>claude</code></pre>
         </div>
@@ -1414,7 +1512,10 @@
         <div class="code-block">
           <div class="code-block-header">
             <span class="code-block-label">Codex CLIを起動</span>
-            <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            <div class="code-block-actions">
+              <span class="copy-ok-badge">コピペでOK</span>
+              <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            </div>
           </div>
           <pre><code>codex</code></pre>
         </div>
@@ -1422,7 +1523,10 @@
         <div class="code-block">
           <div class="code-block-header">
             <span class="code-block-label">Gemini CLIを起動</span>
-            <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            <div class="code-block-actions">
+              <span class="copy-ok-badge">コピペでOK</span>
+              <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+            </div>
           </div>
           <pre><code>gemini</code></pre>
         </div>
@@ -1635,7 +1739,10 @@
             <div class="code-block" style="margin: 0;">
               <div class="code-block-header">
                 <span class="code-block-label">CLAUDE.md</span>
-                <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+                <div class="code-block-actions">
+                  <span class="copy-ok-badge">コピペでOK</span>
+                  <button class="code-copy-btn" onclick="copyCode(this)">コピー</button>
+                </div>
               </div>
               <pre><code># プロジェクトルール
 
@@ -1682,7 +1789,7 @@
               <dd>AIが一度に覚えておける情報量のこと。大きいほど長い文書やたくさんのファイルを同時に処理できます。</dd>
             </div>
           </dl>
-          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent-light);">AI基礎用語270語 教科書</a></p>
+          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent);">AI基礎用語270語 教科書</a></p>
         </div>
 
         <div class="link-box">
@@ -1775,7 +1882,7 @@
               <dd>データの書き方の一種。設定ファイルによく使われます。<code class="code-inline">{"名前": "太郎", "年齢": 30}</code> のような形式です。</dd>
             </div>
           </dl>
-          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent-light);">AI基礎用語270語 教科書</a></p>
+          <p style="margin: 14px 0 0; font-size: 0.88rem;">&#128215; 用語をもっと学ぶ → <a href="https://naokijodan.github.io/ai-vocabulary-textbook/" target="_blank" rel="noopener" style="color: var(--color-accent);">AI基礎用語270語 教科書</a></p>
         </div>
       </section>
 
@@ -2252,6 +2359,15 @@
     function toggleSidebar() {
       document.querySelector('.sidebar').classList.toggle('open');
       document.querySelector('.sidebar-overlay').classList.toggle('active');
+    }
+
+    function togglePhase(el) {
+      const arrow = el.querySelector('.phase-arrow');
+      const group = el.nextElementSibling;
+      if (!group || !group.classList.contains('phase-group')) return;
+      const isOpen = group.classList.contains('open');
+      group.classList.toggle('open', !isOpen);
+      arrow.classList.toggle('open', !isOpen);
     }
 
     function toggleFaq(btn) {
