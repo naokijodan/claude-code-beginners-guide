@@ -39,6 +39,48 @@
       --radius-sm: 14px;
     }
 
+    /* Dark theme */
+    [data-theme="dark"] {
+      --color-bg: #1a1a2e;
+      --color-surface: #232342;
+      --color-surface-hover: #2a2a4a;
+      --color-border: #3a3a5a;
+      --color-text: #e8e6e3;
+      --color-text-muted: #b0adb0;
+      --color-text-dim: #7a7890;
+      --color-primary: #d4925e;
+      --color-primary-light: #e0a873;
+      --color-primary-dark: #c27a4a;
+      --color-accent: #5ba0e0;
+      --color-accent-light: #70b0f0;
+      --color-green: #4cc88a;
+      --color-green-dark: #1e3a2e;
+      --color-yellow: #d4b842;
+      --color-yellow-dark: #2e2a1a;
+      --color-purple: #b080e0;
+      --color-purple-dark: #2a1e3a;
+      --color-red: #e06060;
+      --color-code-bg: #1e1e38;
+    }
+    [data-theme="dark"] .hero { background: linear-gradient(135deg, #1a1a2e 0%, #232342 40%, #1e2e3a 100%); }
+    [data-theme="dark"] .hero::before { background: radial-gradient(circle, rgba(212,146,94,0.1) 0%, transparent 70%); }
+    [data-theme="dark"] .term-box { background: #1e2a3a; border-color: #2a3a5a; }
+    [data-theme="dark"] .link-box { background: #1e2e2a; border-color: #2a4a3a; }
+    [data-theme="dark"] .link-box.install-box { background: linear-gradient(135deg, #2a2218, #232342); border-color: #4a3a2a; }
+    [data-theme="dark"] .tip-box { background: #2a2818; border-color: #4a4020; }
+    [data-theme="dark"] .warn-box { background: #2e1e1e; border-color: #4a2828; }
+    [data-theme="dark"] .link-item { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
+    [data-theme="dark"] .link-item:hover { background: rgba(255,255,255,0.1); }
+    [data-theme="dark"] .copy-ok-badge { background: #1e3a2e; color: #4cc88a; }
+    [data-theme="dark"] .code-block-header { background: rgba(255,255,255,0.03); }
+    [data-theme="dark"] .code-copy-btn { background: rgba(255,255,255,0.06); border-color: var(--color-border); }
+    [data-theme="dark"] .hero-character { background: rgba(35,35,66,0.8); border-color: var(--color-border); }
+    [data-theme="dark"] .faq-a { background: var(--color-surface); }
+    [data-theme="dark"] .scenario-header { background: rgba(212,146,94,0.08); }
+    [data-theme="dark"] .character-speech.warn { background: #2e1e1e; border-color: #4a2828; }
+    [data-theme="dark"] .hero-badge { background: rgba(212,146,94,0.15); border-color: rgba(212,146,94,0.3); }
+    [data-theme="dark"] .hero-tag { background: var(--color-surface); border-color: var(--color-border); }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -969,6 +1011,127 @@
 
     .scroll-top.visible { display: flex; }
 
+    /* Theme toggle */
+    .sidebar-logo {
+      position: relative;
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 0; right: 28px;
+      width: 40px; height: 40px;
+      background: var(--color-surface-hover);
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      line-height: 1;
+    }
+    .theme-toggle:hover {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+    }
+
+    /* Character bubbles */
+    .character-bubble {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin: 24px 0;
+    }
+    .character-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .character-content { flex: 1; }
+    .character-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+    }
+    .character-name.beginner { color: var(--color-accent); }
+    .character-speech {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--color-text-muted);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .character-speech::before {
+      content: '';
+      position: absolute;
+      left: -10px; top: 18px;
+      width: 0; height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 10px solid var(--color-border);
+    }
+    .character-speech::after {
+      content: '';
+      position: absolute;
+      left: -8px; top: 19px;
+      width: 0; height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 9px solid var(--color-surface);
+    }
+    .character-speech.warn {
+      background: #fdf0f0;
+      border-color: #e8b0b0;
+    }
+    .character-speech.warn::before { border-right-color: #e8b0b0; }
+    .character-speech.warn::after { border-right-color: #fdf0f0; }
+    [data-theme="dark"] .character-speech.warn::after { border-right-color: #2e1e1e; }
+
+    /* Hero character */
+    .hero-character {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 30px;
+      padding: 18px 24px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      max-width: fit-content;
+    }
+    .hero-character-emoji { font-size: 2rem; }
+    .hero-character-text {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    .hero-character-text strong { color: var(--color-primary); }
+
+    /* Phase character encouragement */
+    .phase-encourage {
+      text-align: center;
+      margin: -30px 0 40px;
+    }
+    .phase-encourage span:first-child { font-size: 1.2rem; }
+    .phase-encourage span:last-child {
+      font-size: 0.85rem;
+      color: var(--color-text-dim);
+      margin-left: 6px;
+    }
+
     /* Responsive */
     @media (max-width: 1000px) {
       .sidebar { transform: translateX(-100%); }
@@ -995,6 +1158,7 @@
     <div class="sidebar-logo">
       <h2>AI CLI 入門ガイド</h2>
       <span>Claude Code / Codex / Gemini</span>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切替">&#127769;</button>
     </div>
     <ul class="sidebar-nav">
       <li class="nav-phase" onclick="togglePhase(this)">
@@ -1071,6 +1235,10 @@
         <span class="hero-tag">Mac / Windows</span>
         <span class="hero-tag">3ツール対応</span>
       </div>
+      <div class="hero-character">
+        <span class="hero-character-emoji">&#129418;</span>
+        <span class="hero-character-text"><strong>ナビ先生</strong>が最後までご案内します。安心してついてきてくださいね。</span>
+      </div>
     </div>
 
     <div class="content">
@@ -1127,9 +1295,12 @@
           </div>
         </div>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; ポイント</div>
-          <p>全部を一度に覚える必要はありません。Phase 3（使う）まで進められたら、あとは必要になったときに戻って読めば大丈夫です。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">全部を一度に覚える必要はありませんよ。Phase 3（使う）まで進められたら、あとは必要になったときに戻って読めば大丈夫です。</div>
+          </div>
         </div>
       </section>
 
@@ -1138,6 +1309,14 @@
         <div class="section-header">
           <div class="section-number">2</div>
           <h2>AI CLIツールとは？</h2>
+        </div>
+
+        <div class="character-bubble">
+          <div class="character-avatar">&#128522;</div>
+          <div class="character-content">
+            <div class="character-name beginner">はじめさん</div>
+            <div class="character-speech">「AI CLI」って聞いたことないんですが、難しいものですか？パソコンは普段メールと表計算くらいしか使わないんですが...</div>
+          </div>
         </div>
 
         <p>
@@ -1287,9 +1466,19 @@
           </tbody>
         </table>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; どれを選べばいい？</div>
-          <p><strong>迷ったらClaude Codeから始める</strong>のがおすすめです。日本語の理解力が高く、拡張機能（MCP）も豊富で、初心者にも使いやすいです。慣れてきたら、3つすべてをインストールして使い分けることもできます。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#128522;</div>
+          <div class="character-content">
+            <div class="character-name beginner">はじめさん</div>
+            <div class="character-speech">3つもあると迷います...どれから始めればいいですか？</div>
+          </div>
+        </div>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech"><strong>迷ったらClaude Codeから始める</strong>のがおすすめです。日本語の理解力が高く、拡張機能（MCP）も豊富で、初心者にも使いやすいですよ。慣れてきたら、3つすべてをインストールして使い分けることもできます。</div>
+          </div>
         </div>
       </section>
 
@@ -1316,9 +1505,12 @@
           ></iframe>
         </div>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#127909; 視聴のコツ</div>
-          <p>全部を理解できなくても問題ありません。「こんなことができるんだ」というイメージをつかむのが目的です。細かい操作方法はこの後のセクションで解説します。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">全部を理解できなくても問題ありません。「こんなことができるんだ」というイメージをつかむのが目的です。細かい操作方法はこの後のセクションで解説しますね。</div>
+          </div>
         </div>
 
         <h3>もっと詳しく知りたい方へ</h3>
@@ -1351,6 +1543,7 @@
       <div class="phase-divider">
         <span class="phase-label">Phase 2 &#8212; 準備する</span>
       </div>
+      <div class="phase-encourage"><span>&#129418;</span><span>基礎を押さえましたね。次は準備です！</span></div>
 
       <!-- 始める前の準備 -->
       <section class="section" id="prepare">
@@ -1398,9 +1591,12 @@
           </tbody>
         </table>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128176; 費用のヒント</div>
-          <p>3つとも<strong>月額$20前後のサブスクリプション（定額制）</strong>で利用できます。使いすぎで高額請求される心配はありません。すでにChatGPT PlusやGemini Advancedに加入している方は、追加費用なしでCodex CLIやGemini CLIを使い始められます。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">3つとも<strong>月額$20前後のサブスクリプション（定額制）</strong>で利用できます。使いすぎで高額請求される心配はありません。すでにChatGPT PlusやGemini Advancedに加入している方は、追加費用なしでCodex CLIやGemini CLIを使い始められますよ。</div>
+          </div>
         </div>
 
         <div class="term-box">
@@ -1440,7 +1636,7 @@
           以下のリンクから進めてください。
         </p>
 
-        <div class="link-box" style="border-color: #e0c0a0; background: linear-gradient(135deg, #fdf4ee, #fefcfa);">
+        <div class="link-box install-box" style="border-color: #e0c0a0; background: linear-gradient(135deg, #fdf4ee, #fefcfa);">
           <div class="link-box-title" style="color: var(--color-primary); background: rgba(194,122,74,0.12);">&#128640; インストールはこちら</div>
           <div class="link-item">
             <span class="link-icon">&#128187;</span>
@@ -1476,9 +1672,12 @@
           </div>
         </div>
 
-        <div class="warn-box">
-          <div class="warn-box-label">&#9888;&#65039; 注意</div>
-          <p>インストール中にエラーが出た場合は、慌てずにエラーメッセージを確認してください。よくあるエラーと対処法は<a href="#faq">よくある質問</a>セクションにまとめています。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生 &#9888;&#65039;</div>
+            <div class="character-speech warn">インストール中にエラーが出ても慌てないでくださいね。エラーメッセージを確認して、<a href="#faq">よくある質問</a>セクションを見てみてください。よくあるエラーと対処法をまとめてあります。</div>
+          </div>
         </div>
       </section>
 
@@ -1487,12 +1686,21 @@
       <div class="phase-divider">
         <span class="phase-label">Phase 3 &#8212; 使う</span>
       </div>
+      <div class="phase-encourage"><span>&#129418;</span><span>準備OKですね。いよいよ実践です！</span></div>
 
       <!-- はじめの一歩 -->
       <section class="section" id="first-steps">
         <div class="section-header">
           <div class="section-number">7</div>
           <h2>はじめの一歩</h2>
+        </div>
+
+        <div class="character-bubble">
+          <div class="character-avatar">&#128522;</div>
+          <div class="character-content">
+            <div class="character-name beginner">はじめさん</div>
+            <div class="character-speech">インストールできました！でも、最初に何をすればいいんでしょう？ドキドキします...</div>
+          </div>
         </div>
 
         <h3>各ツールの起動方法</h3>
@@ -1613,9 +1821,12 @@
           </tbody>
         </table>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; コツ</div>
-          <p>どのツールでも、<strong>具体的な指示ほど良い結果</strong>が得られます。<br>「いい感じにして」→ &#10060;<br>「A4の請求書テンプレートをExcelで作って。項目は日付、品名、数量、単価、合計」→ &#9989;</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">コツは、<strong>具体的に伝えること</strong>です。<br>&#10060;「いい感じにして」<br>&#9989;「A4の請求書テンプレートをExcelで作って。項目は日付、品名、数量、単価、合計」<br>具体的なほど、AIは良い仕事をしてくれますよ。</div>
+          </div>
         </div>
       </section>
 
@@ -1686,9 +1897,12 @@
           </div>
         </div>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; 失敗しても大丈夫</div>
-          <p>思った通りの結果にならなくても、「もう少し大きい文字にして」「色を赤に変えて」のように追加の指示を出せば、AIが修正してくれます。何度でもやり直せるので、気軽に試してみてください。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">失敗しても大丈夫！「もう少し大きい文字にして」「色を赤に変えて」のように追加の指示を出せば、AIが修正してくれます。何度でもやり直せるので、気軽に試してみてくださいね。</div>
+          </div>
         </div>
       </section>
 
@@ -1697,6 +1911,7 @@
       <div class="phase-divider">
         <span class="phase-label">Phase 4 &#8212; 深める</span>
       </div>
+      <div class="phase-encourage"><span>&#129418;</span><span>使えるようになってきましたね。さらにパワーアップしましょう！</span></div>
 
       <!-- 便利な機能 -->
       <section class="section" id="features">
@@ -1816,6 +2031,14 @@
         <div class="section-header">
           <div class="section-number">10</div>
           <h2>MCPで機能を拡張する</h2>
+        </div>
+
+        <div class="character-bubble">
+          <div class="character-avatar">&#128522;</div>
+          <div class="character-content">
+            <div class="character-name beginner">はじめさん</div>
+            <div class="character-speech">基本はわかってきました！もっと色々できるようになりたいです。拡張機能ってどうやって使うんですか？</div>
+          </div>
         </div>
 
         <p>
@@ -1955,6 +2178,7 @@
       <div class="phase-divider">
         <span class="phase-label">Phase 5 &#8212; 比較 &amp; 解決</span>
       </div>
+      <div class="phase-encourage"><span>&#129418;</span><span>最後の仕上げです！</span></div>
 
       <!-- ツール比較 -->
       <section class="section" id="compare">
@@ -2016,9 +2240,12 @@
           </tbody>
         </table>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; 使い分けのヒント</div>
-          <p>「どれか1つだけ」と決める必要はありません。<strong>Claude Codeで大きな作業を自動化</strong>し、<strong>Codex CLIで安全にコマンド実行</strong>、<strong>Gemini CLIで大量データ処理</strong>、というように使い分けている人も多いです。MCPを使えば、Claude Code内からGPTやGeminiにも質問できます。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">「どれか1つだけ」と決める必要はありませんよ。<strong>Claude Codeで大きな作業を自動化</strong>、<strong>Codex CLIで安全にコマンド実行</strong>、<strong>Gemini CLIで大量データ処理</strong>、というように使い分けている人も多いです。MCPを使えば、Claude Code内からGPTやGeminiにも質問できます。</div>
+          </div>
         </div>
       </section>
 
@@ -2027,6 +2254,14 @@
         <div class="section-header">
           <div class="section-number">13</div>
           <h2>よくある質問・トラブル対応</h2>
+        </div>
+
+        <div class="character-bubble" style="margin-bottom: 30px;">
+          <div class="character-avatar">&#128522;</div>
+          <div class="character-content">
+            <div class="character-name beginner">はじめさん</div>
+            <div class="character-speech">使っていて困ったことが出てきました。みんなが気になる質問をまとめてもらえますか？</div>
+          </div>
         </div>
 
         <div class="faq-item">
@@ -2109,9 +2344,12 @@
           </div>
         </div>
 
-        <div class="warn-box">
-          <div class="warn-box-label">&#9888;&#65039; セキュリティの注意</div>
-          <p>パスワード、APIキー、個人情報などの機密データは、AI CLIツールに直接入力しないでください。環境変数や<code class="code-inline">.env</code>ファイルで管理しましょう。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生 &#9888;&#65039;</div>
+            <div class="character-speech warn">パスワード、APIキー、個人情報などの機密データは、AI CLIツールに直接入力しないでくださいね。環境変数や<code class="code-inline">.env</code>ファイルで管理しましょう。</div>
+          </div>
         </div>
       </section>
 
@@ -2327,9 +2565,12 @@
           </div>
         </div>
 
-        <div class="tip-box">
-          <div class="tip-box-label">&#128161; ポイント</div>
-          <p>CSVのフォーマットや分析の観点が決まっている場合は、CLAUDE.mdにルールを書いておくと、毎回同じ品質の分析資料が作れます。</p>
+        <div class="character-bubble">
+          <div class="character-avatar">&#129418;</div>
+          <div class="character-content">
+            <div class="character-name">ナビ先生</div>
+            <div class="character-speech">CSVのフォーマットや分析の観点が決まっている場合は、CLAUDE.mdにルールを書いておくと、毎回同じ品質の分析資料が作れますよ。</div>
+          </div>
         </div>
 
         <div class="link-box">
@@ -2344,6 +2585,15 @@
         </div>
       </section>
 
+      <!-- ナビ先生のお別れ -->
+      <div class="character-bubble" style="max-width: 650px; margin: 0 auto 40px;">
+        <div class="character-avatar">&#129418;</div>
+        <div class="character-content">
+          <div class="character-name">ナビ先生</div>
+          <div class="character-speech">お疲れさまでした！ここまで読んでくれてありがとうございます。わからないことがあったら、いつでもAIに聞いてみてくださいね。AIは何度聞いても嫌な顔をしませんから。</div>
+        </div>
+      </div>
+
       <!-- Footer -->
       <div class="footer">
         <p>AI CLIツール 完全入門ガイド &#8212; 2026年2月版</p>
@@ -2356,6 +2606,25 @@
   <button class="scroll-top" onclick="scrollToTop()" aria-label="ページ上部へ">&#8593;</button>
 
   <script>
+    // Theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      document.querySelector('.theme-toggle').textContent = isDark ? '\u{1F319}' : '\u2600\uFE0F';
+    }
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.querySelector('.theme-toggle');
+          if (btn) btn.textContent = '\u2600\uFE0F';
+        });
+      }
+    })();
+
     function toggleSidebar() {
       document.querySelector('.sidebar').classList.toggle('open');
       document.querySelector('.sidebar-overlay').classList.toggle('active');
